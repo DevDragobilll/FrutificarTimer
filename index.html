@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frutificar Horas/Timer</title>
+    
+    <link rel="stylesheet" href="./src/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="display">
+            <div class="data" id="data"></div>
+            <div class="relogio" id="relogio">12:00:00 PM</div>
+            <div class="timer Timer"></div>
+        </div>
+        <span></span>
+        <span></span>
+    </div>    
+
+    <script>
+        setInterval(function(){
+            const dataElement = document.querySelector("#data");
+            const timeElement = document.querySelector("#relogio");
+            let date = new Date();
+            let hours = date.getHours();
+            let minutes = date.getMinutes();
+            let seconds = date.getSeconds();
+
+            if(hours < 10){
+                hours = "0" + hours;
+            }
+
+            if(minutes < 10){
+                minutes = "0" + minutes;
+            }
+
+            if(seconds < 10){
+                seconds = "0" + seconds;
+            }
+
+            let formattedDate = date.toLocaleDateString(); // Obtém a data formatada
+
+            dataElement.textContent = formattedDate;
+            timeElement.textContent = hours + ":" + minutes + ":" + seconds;
+        }, 1000);
+    </script>
+    <script src="./src/js/main.js" type="module"></script>
+</body>
+</html>

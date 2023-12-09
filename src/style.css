@@ -1,0 +1,125 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+html{
+    display: grid;
+    height: 100%;
+    place-items: center;
+    Background: linear-gradient(45deg,#FF7400,#FFA55B,#ffffff,#FFA55B,#FF7400);
+	Background-size: 300% 300%;
+	animation: color 12s ease-in-out infinite;
+	}
+	@keyframes color{
+	0%{
+		background-position: 0 50%;
+	}
+	50%{
+		background-position: 100% 50%;
+	}
+	100%{
+		background-position: 0 50%;
+	}
+}
+.wrapper{
+    width: 1100px;
+    height: 650px;
+    border-radius: 10px;
+    cursor: default;
+    background: linear-gradient(45deg, #FF7400,#ffffff,#ff9900);
+    Background-size: 100% 100%;
+	animation: color 12s ease-in-out infinite;
+	}
+	@keyframes color{
+	0%{
+		background-position: 0 50%;
+	}
+	50%{
+		background-position: 100% 50%;
+	}
+	100%{
+		background-position: 0 50%;
+	}
+}
+.wrapper .display{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ffcfa7;
+    border-radius: 6px;
+    width: 1085px;
+    height: 635px;
+    text-align: center;
+    z-index: 99;
+}
+
+.wrapper .display .relogio, #relogio{
+    line-height: 200px;
+    color: white;
+    font-size: 150px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-shadow: 3px 3px 5px black;
+}
+.wrapper .display .data{
+    line-height: 60px;
+    color: white;
+    font-size: 50px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-shadow: 3px 3px 5px black;
+}
+.wrapper .display .Timer{
+    font-family: sans-serif;
+    display: inline-block;
+    padding: 20px 30px;
+    width: 700px;
+    height: 360px;
+    border-radius: 30px;
+    background: white;
+}
+.timer__part {
+    font-size: 200px;
+    font-weight: bold;
+}
+.timer__btn {
+    width: 70px;
+    height: 70px;
+    margin-left: 10px;
+    border-radius: 40%;
+    border: none;
+    color: white;
+    background: #8208e6;
+}
+.timer__btn--start {
+    background: #00b84c;
+}
+.timer__btn--stop {
+    background: #ff0256;
+}
+.endtimer {
+    display: none;
+    font-size: 120px;
+    letter-spacing: 7px;
+    font-family: 'Anton', sans-serif;
+    font-weight: bold;
+    margin-top: 5px;
+    animation: blink 0.5s infinite;
+    text-shadow: 4px 4px 4px black; /* Adiciona um contorno preto ao texto */
+}
+
+@keyframes blink {
+    0% {
+        color: red;
+    }
+    50% {
+        color: yellow;
+    }
+    100% {
+        color: red;
+    }
+
+}
