@@ -1,0 +1,30 @@
+.text {
+    color: red;
+    font-size: 30px;
+    font-family: sans-serif;
+    font-weight: bold;
+    animation: blink 0.5s infinite;
+    text-shadow: 2px 2px 2px black; /* Adiciona um contorno preto ao texto */
+}
+
+.ultrapassou{
+    font-size: 40px;
+    line-height: 50px;
+    font-family: sans-serif;
+    font-weight: bold;
+    animation: blink 0.5s infinite;
+    text-shadow: 2px 2px 2px black; /* Adiciona um contorno preto ao texto */
+}
+
+.minute {
+    font-size: 110px;
+}
+
+.sec {
+    font-size: 110px;
+}
+
+.msec {
+    display: none;
+    font-size: 50px;
+}

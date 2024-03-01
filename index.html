@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frutificar Horas/Timer</title>
+    
+    <!--links-->
+    <link rel="stylesheet" href="./src/css/style.css">
+    <link rel="stylesheet" href="src/css/stopwatch.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="src/imagens/logonovo_2021.ico" type="image/x-icon">
+
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .wrapper {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .display {
+            position: relative;
+            z-index: 1;
+        }
+
+        .controls {
+            margin-top: 20px; /* Adiciona espaço entre os botões e o input */
+            display: flex;
+            align-items: center;
+        }
+
+        #avisoInput {
+            padding: 10px;
+            border: 2px solid #000;
+            border-radius: 5px;
+            margin-right: 10px; /* Adiciona espaço entre os elementos */
+        }
+
+        #btnAviso {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        #btnAviso:hover {
+            background-color: #0056b3;
+        }
+        /* Estilos para a caixa de diálogo de alerta */
+        .custom-alert {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            border: 2px solid #000;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            z-index: 9999; /* Garante que a caixa de diálogo esteja na frente de outros elementos */
+            display: none; /* Inicia oculto */
+            text-align: center; /* Centraliza o texto */
+        }
+
+        .custom-alert h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            animation: pulse 1s infinite alternate; /* Adiciona animação de pulso */
+            color: yellow; /* Define a cor amarela */
+        }
+
+        .custom-alert p {
+            font-size: 50px;
+        }
+
+        .custom-alert button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        @keyframes pulse {
+            0% {
+                color: black;
+            }
+            33% {
+                color: red;
+            }
+            66% {
+                color: yellow;
+            }
+            100% {
+                color: black;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="display">
+            <div class="data" id="data"></div>
+            <div class="relogio" id="relogio">12:00:00 PM</div>
+            <div class="timer Timer"></div>
+        </div>
+    </div> 
+    <!-- Adiciona o input e o botão -->
+    <div class="controls">
+        <input type="text" id="avisoInput" placeholder="Digite seu aviso">
+        <button id="btnAviso">Enviar aviso</button>
+        <!-- Caixa de diálogo de alerta -->
+        <div class="custom-alert" id="customAlert">
+            <h2>MENSAGEM IMPORTANTE</h2>
+            <p id="alertMessage">Sua mensagem aqui!</p>
+            <button onclick="closeAlert()">Fechar</button>
+        </div>
+        
+        <script>
+            // Função para fechar o alerta
+            function closeAlert() {
+                document.getElementById('customAlert').style.display = 'none';
+            }
+
+            // Função para exibir o alerta com a mensagem especificada
+            function showAlert(message) {
+                var alertMessage = document.getElementById('alertMessage');
+                // Limita a mensagem a 210 caracteres
+                var truncatedMessage = message.substring(0, 210);
+                alertMessage.textContent = truncatedMessage;
+                document.getElementById('customAlert').style.display = 'block';
+            }
+             // Adiciona um evento de escuta ao campo de entrada para verificar continuamente o comprimento do texto
+             document.getElementById('avisoInput').addEventListener('input', function() {
+                var message = this.value;
+                if (message.length > 210) {
+                    alert('O limite de caracteres foi atingido (máximo 210 caracteres).');
+                    // Trunca a mensagem para 210 caracteres
+                    this.value = message.substring(0, 210);
+                }
+            });
+        </script>
+    </div>
+    
+    <script>
+        setInterval(function(){
+            const dataElement = document.querySelector("#data");
+            const timeElement = document.querySelector("#relogio");
+            let date = new Date();
+            let hours = date.getHours();
+            let minutes = date.getMinutes();
+            let seconds = date.getSeconds();
+
+            if(hours < 10){
+                hours = "0" + hours;
+            }
+
+            if(minutes < 10){
+                minutes = "0" + minutes;
+            }
+
+            if(seconds < 10){
+                seconds = "0" + seconds;
+            }
+
+            let formattedDate = date.toLocaleDateString(); // Obtém a data formatada
+
+            dataElement.textContent = formattedDate;
+            timeElement.textContent = hours + ":" + minutes + ":" + seconds;
+
+            // Verifica se faltam menos de 30 segundos e adiciona a classe 'warning' se necessário
+            let totalSeconds = hours * 3600 + minutes * 60 + seconds;
+            if (totalSeconds >= 11 * 3600 + 30 * 60) {
+                timeElement.classList.remove('warning');
+            } else {
+                timeElement.classList.add('warning');
+            }
+        }, 1000);
+    </script>
+    <script src="./src/js/main.js" type="module"></script>
+    <script>
+        document.getElementById('btnAviso').addEventListener('click', function() {
+            const aviso = document.getElementById('avisoInput').value.toUpperCase(); // Converte para caixa alta
+            showAlert(aviso); // Exemplo: Mostra um alerta com o texto inserido pelo usuário
+        });
+    </script>
+</body>
+</html>
