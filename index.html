@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frutificar Horas/Timer</title>
+    
+    <!--links-->
+    <link rel="stylesheet" href="./src/css/style.css">
+    <link rel="stylesheet" href="src/css/stopwatch.css">
+    <link rel="stylesheet" href="./src/css/caixaDeAviso.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="src/imagens/logonovo_2021.ico" type="image/x-icon">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="display">
+            <div class="data" id="data"></div>
+            <div class="relogio" id="relogio">12:00:00 PM</div>
+            <div class="timer Timer"></div>
+        </div>
+    </div> 
+    <!-- Adiciona o input e o botão -->
+    <div class="controls">
+        <input type="text" id="avisoInput" placeholder="Digite seu aviso">
+        <button id="btnAviso">Enviar aviso</button>
+        <!-- Caixa de diálogo de alerta -->
+        <div class="custom-alert" id="customAlert">
+            <h2>MENSAGEM IMPORTANTE</h2>
+            <p id="alertMessage">Sua mensagem aqui!</p>
+            <button id="closeAlertButton">Fechar</button>
+        </div>
+    </div>
+    
+    <script src="./src/js/main.js" type="module"></script>
+</body>
+</html>

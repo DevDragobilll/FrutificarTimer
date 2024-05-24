@@ -1,0 +1,114 @@
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .wrapper {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .display {
+            position: relative;
+            z-index: 1;
+        }
+
+        .controls {
+            margin-top: 20px;
+            /* Adiciona espaço entre os botões e o input */
+            display: flex;
+            align-items: center;
+        }
+
+        #avisoInput {
+            padding: 10px;
+            border: 2px solid #000;
+            border-radius: 5px;
+            margin-right: 10px;
+            /* Adiciona espaço entre os elementos */
+        }
+
+        #btnAviso {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        #btnAviso:hover {
+            background-color: #0056b3;
+        }
+
+        /* Estilos para a caixa de diálogo de alerta */
+        .custom-alert {
+            width: 80vw;
+            min-height: 300px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            border: 2px solid #000;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+            /* Garante que a caixa de diálogo esteja na frente de outros elementos */
+            display: none;
+            /* Inicia oculto */
+            text-align: center;
+            /* Centraliza o texto */
+        }
+
+        .custom-alert h2 {
+            font-size: 3vw;
+            /* Ajusta o tamanho da fonte com base na largura da viewport */
+            margin-bottom: 20px;
+            animation: pulse 1s infinite alternate;
+            /* Adiciona animação de pulso */
+        }
+
+        .custom-alert p {
+            font-family: "arial black";
+            font-size: 6vw;
+            /* Ajusta o tamanho da fonte com base na largura da viewport */
+            overflow-wrap: break-word;
+            text-transform: uppercase;
+            /* Transforma o texto em caixa alta */
+        }
+
+        .custom-alert button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        @keyframes pulse {
+            0% {
+                color: black;
+            }
+
+            33% {
+                color: red;
+            }
+
+            66% {
+                color: yellow;
+            }
+
+            100% {
+                color: black;
+            }
+        }
