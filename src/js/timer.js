@@ -19,6 +19,7 @@ export default class Timer {
         this.conometroInterval = null;
         this.remainingSeconds = 0;
         this.hasFinished = false;
+        this.additionalTimeAdded = false; // Flag to track if additional time has been added
 
         this.el.conometro.style.display = 'none';
 
@@ -36,17 +37,14 @@ export default class Timer {
         this.el.reset.addEventListener("click", () => {
             let inputMinutes = prompt("Coloque o seu tempo:");
 
-            // Verifica se o valor inserido é um número
             if (!isNaN(inputMinutes)) {
-                // Converte o valor para número
                 inputMinutes = parseInt(inputMinutes);
-
-                // Verifica se o valor está dentro do intervalo aceitável
                 if (inputMinutes < 60) {
                     this.stop();
                     this.remainingSeconds = inputMinutes * 60;
                     this.updateInterfaceTimer();
-                    this.hasFinished = false; // Reinicia o estado de finalização
+                    this.hasFinished = false;
+                    this.additionalTimeAdded = false; // Reset the flag when the timer is reset
                 } else {
                     alert("Por favor, insira um valor menor que 60.");
                 }
@@ -89,17 +87,15 @@ export default class Timer {
         this.el.control.style.display = "none";
         this.el.reset.style.display = "none";
 
-        // Substitui dinamicamente o conteúdo da timer-container pela mensagem de término
         this.el.timerContainer.style.display = "none";
         this.el.endtimer.style.display = "block";
 
         this.el.seconds.classList.add("finished");
         this.el.endtimer.classList.add("finished");
 
-        // Inicia o cronômetro junto com 'ACABOU O SEU TEMPO!!!'
         this.el.conometro.style.display = 'block';
         this.startConometro();
-        this.hasFinished = true; // Define o estado de finalização
+        this.hasFinished = true;
     }
 
     startConometro() {
@@ -134,15 +130,17 @@ export default class Timer {
             this.updateInterfaceTimer();
 
             if (this.remainingSeconds <= 30) {
-                // Adiciona a classe 'blinking' quando faltar 30 segundos ou menos
                 this.el.timerContainer.classList.add('blinking');
             } else {
-                // Remove a classe 'blinking' se faltar mais de 30 segundos
                 this.el.timerContainer.classList.remove('blinking');
             }
-    
+
+            if (this.remainingSeconds === 10 && !this.additionalTimeAdded) {
+                this.remainingSeconds += 300; // Adiciona 5 minutos
+                this.additionalTimeAdded = true; // Marca que o tempo extra foi adicionado
+            }
+
             if (this.remainingSeconds === 0) {
-                // Remove a classe 'blinking' quando o tempo se esgotar
                 this.el.timerContainer.classList.remove('blinking');
                 this.timerEndActions();
             }
@@ -171,6 +169,7 @@ export default class Timer {
         this.remainingSeconds = 0;
         this.updateInterfaceTimer();
         this.updateInterfaceControls();
+        this.additionalTimeAdded = false; // Reset the flag when the timer is reset
     }
 
     static getHTML() {
