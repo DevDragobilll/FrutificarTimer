@@ -128,29 +128,34 @@ export default class Timer {
         this.interval = setInterval(() => {
             this.remainingSeconds--;
             this.updateInterfaceTimer();
-
+    
             if (this.remainingSeconds <= 30) {
                 this.el.timerContainer.classList.add('blinking');
             } else {
                 this.el.timerContainer.classList.remove('blinking');
             }
-
-            if (this.remainingSeconds === 10 && !this.additionalTimeAdded) {
-                let addTime = confirm("Deseja acrescentar mais 5 minutos?");
-                if (addTime) {
-                    this.remainingSeconds += 300; // Adiciona 5 minutos
-                    this.additionalTimeAdded = true; // Marca que o tempo extra foi adicionado
-                }
+    
+            if (this.remainingSeconds === 30 && !this.additionalTimeAdded) {
+                this.additionalTimeAdded = true; // Marca que a pergunta foi feita
+                setTimeout(() => {
+                    let addTime = confirm("Deseja acrescentar mais 5 minutos?");
+                    if (addTime) {
+                        this.remainingSeconds += 300; // Adiciona 5 minutos
+                        this.updateInterfaceTimer(); // Atualiza a interface imediatamente após adicionar o tempo
+                    }
+                }, 0);
             }
-
+    
             if (this.remainingSeconds === 0) {
                 this.el.timerContainer.classList.remove('blinking');
                 this.timerEndActions();
             }
         }, 1000);
-
+    
         this.updateInterfaceControls();
     }
+    
+    
 
 
     stop() {
