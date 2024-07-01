@@ -136,8 +136,11 @@ export default class Timer {
             }
 
             if (this.remainingSeconds === 10 && !this.additionalTimeAdded) {
-                this.remainingSeconds += 300; // Adiciona 5 minutos
-                this.additionalTimeAdded = true; // Marca que o tempo extra foi adicionado
+                let addTime = confirm("Deseja acrescentar mais 5 minutos?");
+                if (addTime) {
+                    this.remainingSeconds += 300; // Adiciona 5 minutos
+                    this.additionalTimeAdded = true; // Marca que o tempo extra foi adicionado
+                }
             }
 
             if (this.remainingSeconds === 0) {
@@ -148,6 +151,7 @@ export default class Timer {
 
         this.updateInterfaceControls();
     }
+
 
     stop() {
         clearInterval(this.interval);
